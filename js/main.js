@@ -235,7 +235,7 @@ let dropdownOptions = document.querySelectorAll(".page-scroll");
 document.addEventListener("scroll", (w) => {
   if (window.scrollY <= 88) {
     console.log("change the logo", lightLogo);
-    lightLogo.src = lightLogoUrl;
+    lightLogo.src = darkLogoUrl;
     console.log("color white");
     topNavbar.style.background = "none";
     topNavbar.style.backdropFilter = "blur(10px)";

@@ -382,9 +382,15 @@ ul, ol, li {
 /*  Intro */
 
 .intro3 {
-	background: url(../images/bg/HeroSection.jpg) no-repeat center;
+	background: url(../images/bg/1920\ 1080.png) no-repeat center;
 	padding: 200px 0 150px;
 	background-size: cover;
+}
+
+@media(max-width: 767px){
+	.intro3 {
+		padding: 130px 0 150px;
+	}	
 }
 .intro3::before{
 	display: block;
