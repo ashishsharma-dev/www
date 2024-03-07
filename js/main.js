@@ -234,17 +234,17 @@ let dropdownOptions = document.querySelectorAll(".page-scroll");
 
 document.addEventListener("scroll", (w) => {
   if (window.scrollY <= 88) {
-    console.log("change the logo", lightLogo);
+    // console.log("change the logo", lightLogo);
     lightLogo.src = darkLogoUrl;
-    console.log("color white");
+    // console.log("color white");
     topNavbar.style.background = "none";
     topNavbar.style.backdropFilter = "blur(10px)";
   }
 
   if (window.scrollY >= 88) {
-    console.log("change the logo", lightLogo);
+    // console.log("change the logo", lightLogo);
     darkLogo.src = darkLogoUrl;
-    console.log("color red");
+    // console.log("color red");
     topNavbar.style.background = "none";
     topNavbar.style.backdropFilter = "blur(10px)";
   }
