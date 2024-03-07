@@ -1083,6 +1083,12 @@ box-shadow: 0px 2px 10px -1px rgba(0, 0, 0, 0.19);
 	padding: 0 14%;
 }
 
+@media(max-width:767px){
+	.about-inline p {
+		padding: 0;
+	}	
+}
+
 .ai-list {
 	margin-top: 40px;
 }
@@ -2263,10 +2269,24 @@ margin-bottom: 5px;
 	border-radius: 10px;
 }
 
+@media(max-width:767px){
+	.video-action{
+		padding-top: 25px;
+		height: 285px;
+	}
+}
+
 .video-action h1{
 	/* color: #a82d49; */
 	color: #ffffff;
-	padding-top:40px;
+	padding:40px 5rem;
+}
+
+@media(max-width:767px){
+	.video-action h1{
+		padding: 0px 18px;
+		font-size: 25px;
+	}
 }
 
 .video-action p{
