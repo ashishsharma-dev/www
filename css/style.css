@@ -382,7 +382,7 @@ ul, ol, li {
 /*  Intro */
 
 .intro3 {
-	background: url(../images/bg/1920\ 1080.png) no-repeat center;
+	background: url(../images/bg/1920\ 1080.jpg) no-repeat center;
 	padding: 200px 0 150px;
 	background-size: cover;
 }
@@ -2252,14 +2252,13 @@ footer .list-inline li {
 margin-bottom: 5px;
 }
 
-
 .video-action {
     background-image: url(../images/parallax/2680\ 1414.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     color: #fff;
-    height: 450px;
+    height: 400px;
     padding-top: 50px;
 	border-radius: 10px;
 }
