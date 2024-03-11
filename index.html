@@ -27,6 +27,8 @@
 
     <!-- THEME / PLUGIN CSS -->
     <link rel="stylesheet" href="js/vendors/slick/slick.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 
 
@@ -98,11 +100,20 @@
         border: none;
         color: #000000;
     }
+
+    .zoom-effect {
+        transform: scale(0);
+        transition: transform 0.5s ease;
+    }
+
+    .zoom-effect.active {
+        transform: scale(1);
+    }
 </style>
 
 <body id="home">
     <div class="body">
-        <div class="thank-you-modal hide">
+        <div class="thank-you-modal zoom-effect">
             <div class="thank-you-content">
                 <h2>Thank you for the submission</h2>
                 <button class="closeBtn">Close</button>
@@ -580,6 +591,10 @@
     <script src="js/main.js"></script>
     <script src="js/vendors/mc/jquery.ketchup.all.min.js"></script>
     <script src="js/vendors/mc/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 
     <script>
@@ -616,7 +631,7 @@
         let closeBtn = document.querySelector(".closeBtn");
 
         closeBtn.addEventListener("click", (e) => {
-            thankYouModal.classList.add("hide");
+            thankYouModal.classList.remove("active");
             enableScroll()
         });
 
@@ -630,7 +645,7 @@
                     submitBtn.innerHTML = 'Submit'
                     submitBtn.disabled = false
                     disableScroll()
-                    thankYouModal.classList.remove('hide')
+                    thankYouModal.classList.add('active')
                     form.reset()
                 }
                 )
