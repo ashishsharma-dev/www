@@ -258,7 +258,7 @@
                             <p>Crafting bespoke artisanal gifts tailored for every rhythmic moment, ensuring every
                                 moment is truly unforgettable. We're Wicked – where memories meet
                                 exquisite craftsmanship.</p>
-                            <a href="#" class="btn btn-lg btn-primary">Learn More <i class="icon-arrow-right"></i></a>
+                            <!-- <a href="#" class="btn btn-lg btn-primary">Learn More <i class="icon-arrow-right"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -282,7 +282,7 @@
                             </ul>
 
                             <div class="space30"></div>
-                            <a href="#" class="btn btn-lg btn-primary">Learn More <i class="icon-arrow-right"></i></a>
+                            <!-- <a href="#" class="btn btn-lg btn-primary">Learn More <i class="icon-arrow-right"></i></a> -->
                         </div>
                         <div class="col-md-7">
                             <img src="images/features/800 800.png" class="pull-left img-responsive" alt="" />
@@ -301,7 +301,7 @@
                 <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et purus a odio <br>finibus bibendum
                     in sit amet leo. Mauris feugiat erat tellus.</p> -->
                 <br><br>
-                <a href="https://www.youtube.com/watch?v=bZx8rPd-PKQ" class="swipebox-video">
+                <a href="https://www.youtube.com/watch?v=ylIgikF3H9c" class="swipebox-video">
                     <div class="intro-video-pop">
                         <i class="fa fa-play"></i> Watch Our Story
                     </div>
@@ -316,10 +316,9 @@
                 <div class="about-inline text-center">
                     <h3>Explore the happiness
                     </h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et purus a odio finibus bibendum
-                        in sit amet leo. Mauris feugiat erat tellus. Far far away, behind the word mountains, far from
-                        the countries Vokalia and Consonantia, there
-                        live the blind texts. Separated they live in Bookmarksgrove.</p>
+                    <p>Savor our tempting sweets and feel truly happy! We have everything for everyone, from crackling
+                        mathris to delicious nuts, sweet mithais, and beautiful gift boxes. We want to make you happy
+                        and savor every second with our mouthwatering food.</p>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -486,7 +485,7 @@
                             Conditions</a>
                         <a target="_blank" href="https://wicked-gourmet.in/pages/privacy">Privacy Policy</a>
                         <a target="_blank" href="https://wicked-gourmet.in/pages/refund-policy">Refund Policy</a>
-                        <a href="#">FAQ</a>
+                        <a class="page-scroll" href="#faq">FAQ</a>
                     </div>
                     <div class="footer-social space30 text-center">
                         <a href="https://www.facebook.com/wickedgourmetgifting" class="fa fa-facebook"></a>
@@ -523,38 +522,28 @@
                             <h2>Make Your Order Now!</h2>
 
                             <div class="clearfix space40"></div>
-                            <form class="positioned" name="sentMessage" id="contactForm" action="php/contact.php"
-                                method="post">
+                            <form class="positioned" name="submit-to-google-sheet-modal" id="contactForm">
                                 <div class="row">
 
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="senderName" id="senderName" placeholder="Your Name" required
-                                            type="text">
+                                        <input name="name" id="senderName" placeholder="Your Name" required type="text">
                                     </div>
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="senderEmail" id="senderEmail" placeholder="Email Address" required
+                                        <input name="email" id="senderEmail" placeholder="Email Address" required
                                             type="email">
                                     </div>
                                 </div>
 
+                                <input name="events" id="events" placeholder="Events" required type="text">
                                 <input name="address" id="address" placeholder="Address" required type="text">
 
-                                <input placeholder="Zip Code" required type="number">
+                                <input name="zipcode" placeholder="Zip Code" required type="number">
 
-                                <input placeholder="Mobile No." required type="number">
+                                <input type="tel" pattern="[0-9]{10}" name="phoneNumber" placeholder="Mobile No."
+                                    required>
 
-
-                                <select name="name" id="select" required="required">
-                                    <option value=""> Rainbow Vegetable Sandwich - $10.50 </option>
-                                    <option value="1"> Vegetarian Burger - $9.20 </option>
-                                    <option value="2"> Raspberry Stuffed French Toast - $12.50 </option>
-
-                                </select>
-
-
-
-                                <button type="submit" class="btn btn-primary btn-ico">Send Message<i
-                                        class="fa fa-paper-plane-o"></i></button>
+                                <button type="submit" class="btn btn-primary btn-ico btn-modal">Send Message<i
+                                        class="animate fa fa-paper-plane-o"></i></button>
                             </form>
                             <div id="sendingMessage" class="statusMessage">
                                 <p><i class="fa fa-spin fa-cog"></i> Sending your message. Please wait...</p>
@@ -619,7 +608,9 @@
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzP_TeGDI6R7TNUxHoU9LG0aAEAS9TIOFoVXXGzfWTeIDucmiCs4tJCWIVXlXFwYGLO/exec'
         const form = document.forms['submit-to-google-sheet']
+        const formModal = document.forms['submit-to-google-sheet-modal']
         const submitBtn = document.querySelector('#submitBtn')
+        const submitModal = document.querySelector('.btn-modal')
 
         let thankYouModal = document.querySelector(".thank-you-modal");
         let closeBtn = document.querySelector(".closeBtn");
@@ -641,6 +632,23 @@
                     disableScroll()
                     thankYouModal.classList.remove('hide')
                     form.reset()
+                }
+                )
+                .catch(error => console.error('Error!', error.message))
+        })
+
+        formModal.addEventListener('submit', e => {
+            submitModal.disabled = true
+            submitModal.innerHTML = 'Loading...'
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(formModal) })
+                .then(response => {
+                    console.log('Success!', response)
+                    submitModal.innerHTML = 'Send Message<i class="animate fa fa-paper-plane-o"></i>'
+                    submitModal.disabled = false
+                    disableScroll()
+                    thankYouModal.classList.remove('hide')
+                    formModal.reset()
                 }
                 )
                 .catch(error => console.error('Error!', error.message))
